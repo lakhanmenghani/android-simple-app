@@ -10,17 +10,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".SourcesActivity" />
+
+        <activity
+            android:name=".DetailsActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity android:name=".SourcesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".DetailsActivity"
-            android:parentActivityName="newapp.org.myapp.MainActivity"/>
-
     </application>
 
 </manifest>
