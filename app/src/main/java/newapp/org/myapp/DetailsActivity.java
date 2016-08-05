@@ -11,6 +11,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import newsapp.org.myapp.objects.Article;
+import newsapp.org.myapp.objects.Articles;
 import newsapp.org.myapp.objects.NewsObject;
 
 /**
@@ -30,13 +32,13 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-
         webView = (WebView) findViewById(R.id.activity_details_webview);
         progressBar = (ProgressBar) findViewById(R.id.activity_details_progressBar);
 
         int position = getIntent().getIntExtra(KEY_POSITION, DEFAULT_POSITIOON);
-        NewsObject newsObject = NewsObject.getNewsObjects().get(position);
+        Article article = Articles.getArticleList().get(position);
+
+        getSupportActionBar().setTitle(article.getTitle());
 
         progressBar.setVisibility(View.VISIBLE);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -53,7 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
-        webView.loadUrl(newsObject.getDetailUrl());
+        webView.loadUrl(article.getUrl());
     }
 
     public static void start(Context context, int position) {
@@ -62,4 +64,5 @@ public class DetailsActivity extends AppCompatActivity {
 
         context.startActivity(intent);
     }
+
 }

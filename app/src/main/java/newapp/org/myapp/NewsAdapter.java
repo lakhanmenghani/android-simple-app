@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import newsapp.org.myapp.objects.NewsObject;
+import newsapp.org.myapp.objects.Article;
+import newsapp.org.myapp.objects.Articles;
 
 import com.bumptech.glide.Glide;
 import java.util.List;
@@ -20,9 +21,9 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
-    List<NewsObject> newsObjectsList;
+    List<Article> newsObjectsList;
 
-    public NewsAdapter(List<NewsObject> newsObjectsList) {
+    public NewsAdapter(List<Article> newsObjectsList) {
         this.newsObjectsList = newsObjectsList;
     }
 
@@ -37,10 +38,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         if(newsObjectsList==null)
             return;
 
-        NewsObject currentNewsObjects = newsObjectsList.get(position);
-        holder.newsTitle.setText(currentNewsObjects.getTitle());
-        holder.newsDate.setText(currentNewsObjects.getDate());
-        holder.newsDesc.setText(currentNewsObjects.getDesc());
+        Article article = newsObjectsList.get(position);
+        holder.newsTitle.setText(article.getTitle());
+        holder.newsDate.setText(article.getPublishedAt());
+        holder.newsDesc.setText(article.getDescription());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 DetailsActivity.start(view.getContext(), position);
             }
         });
-        Glide.with(holder.newsImage.getContext()).load(currentNewsObjects.getImageUrl()).into(holder.newsImage);
+        Glide.with(holder.newsImage.getContext()).load(article.getUrlToImage()).into(holder.newsImage);
     }
 
     public int getItemCount()
